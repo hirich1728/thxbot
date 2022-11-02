@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>코인 수익률 계산기</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="title" content="코인 수익률 계산기" />
+    <meta
+      name="description"
+      content="코인 수익률 계산기. 매도 금액에 따른 수익률을 계산해보세요. 
+      코인 수익률 계산기는 매수단가와 수량, 매도 단가를 입력하면 예상 수익률이 자동 계산됩니다.
+      매매 수수료가 제외된다는 점을 참고하세요."
+    />
+    <meta name="author" content="땡스봇" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:title" content="코인 수익률 계산기" />
+    <meta
+      property="og:description"
+      content="코인 수익률 계산기. 매도 금액에 따른 수익률을 계산해보세요. 
+      코인 수익률 계산기는 매수단가와 수량, 매도 단가를 입력하면 예상 수익률이 자동 계산됩니다.
+      매매 수수료가 제외된다는 점을 참고하세요."
+    />
+    <meta property="og:image" content="" />
+
+    <link href="bootstrap.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <link rel="canonical" href="" />
+    <script src="stockScript.js"></script>
+    
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-109755163-15");
+    </script>
+
+   
+
+    <!-- sns -->
+    
+    
+    <script src="https://code.jquery.com/jquery-1.8.0.js" integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs=" crossorigin="anonymous"></script>;
+  </head>
+
+  <body>
+  
+    <script>
+      $(window).on('load', function(){
+        $("#load").hide();
+      });
+    </script>
+
+<style>
+.navbar-nav > li > a {
+  padding: 10px 8px 10px 8px
+}
+</style>
+
+    <div class="container">
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            
+          </div>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">              
+              <li><a href="calcsplitsell.html">코인 분할매도 계산기</a></li>            
+              <li class="active"><a href="#">코인 수익률 계산</a></li>
+              <li><a href="#">코인 물타기계산기</a></li>
+              <li><a href="#">코인 평단가 계산</a></li>
+              
+            </ul>
+          </div>
+          <!--/.nav-collapse -->
+        </div>
+        <!--/.container-fluid -->
+      </nav>
+
+    
+
+      <!-- /////////////////////////////////////////////////////////////////// -->
+
+      
+      
+      <div style="padding-top: 5px">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">코인 수익률 계산기</h4>
+            <br />
+            <ul>
+              <li>소수점 네자리로 계산됩니다. 수량 입력 시 네자리로 사용하세요.</li>
+              <li>코인 계산기는 수수료가 적용되지 않습니다. 계산 결과는 참고용으로만 사용하세요.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-top: 2px">
+        <div class="table-responsive" id="capture">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th class="text-right" style="width: 33%">매수단가</th>
+                <th class="text-right" style="width: 34%">매수수량</th>
+                <th class="text-right" style="width: 33%">매도단가</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="active">
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="매수단가" id="inputValue" onKeyup="inputNumberFormat(this);calc();" />
+                </td>
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="매수수량" id="inputStock" onKeyup="inputNumberFormatPoint(this);calc();" />
+                </td>
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="매도단가" id="inputPrice" onKeyup="inputNumberFormat(this);calc();" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-borderless">
+            <tbody>
+              <tr class="text-success">
+                <td style="width: 20%">매수금</td>
+                <td style="width: 30%; text-align: right">
+                  <div id="totalPrice1">0</div>
+                </td>
+                <td style="width: 20%">매도금</td>
+                <td style="width: 30%; text-align: right">
+                  <div id="totalPrice2">0</div>
+                </td>
+              </tr>
+              <tr class="text-success">
+                <td style="width: 20%">수익률(%)</td>
+                <td style="width: 30%; text-align: right">
+                  <div id="totalValue1">0</div>
+                </td>
+                <td style="width: 20%">손익</td>
+                <td style="width: 30%; text-align: right">
+                  <div id="totalValue2">0</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div>
+          <div style="text-align: center">
+            <button type="button" class="btn btn-primary" onclick="reset()">초기화</button>
+            
+            <button type="button" class="btn btn-primary" onclick="clip()">주소복사</button>
+          </div>
+        </div>
+      </div>
+
+      
+ 
+      
+    </div>
+    <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+	================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="ie10-viewport-bug-workaround.js"></script>
+
+
+    <script>
+      let refreshCount = 0;
+
+      function reset() {
+        refreshCount++;
+        if (refreshCount > 5) window.location.href = window.location.href; // location.reload();
+
+        $("#inputValue").val("");
+        $("#inputStock").val("");
+        $("#inputPrice").val("");
+
+        $("#totalPrice1").text("0");
+        $("#totalPrice2").text("0");
+        $("#totalValue1").text("0");
+        $("#totalValue2").text("0");
+      }
+
+      function calc() {
+        var inputValue = uncomma($("#inputValue").val());
+        var inputStock = uncomma2($("#inputStock").val());
+        var inputPrice = uncomma($("#inputPrice").val());
+
+        if (inputValue > 0 && inputStock > 0 && inputPrice > 0) {
+          var tempVa11 = inputValue * inputStock;
+          $("#totalPrice1").text(comma(tempVa11));
+          var tempVa12 = inputPrice * inputStock;
+          $("#totalPrice2").text(comma(tempVa12));
+          var tempVa13 = inputValue * inputStock + inputPrice * inputStock;
+          var tempVa15 = Math.floor(tempVa12 - tempVa11);
+          $("#totalValue2").text(comma(tempVa15));
+
+          var tempVa16 = ((tempVa15 / tempVa11) * 100).toFixed(2);
+          var temp = "";
+          if (tempVa16 > 0) temp = "+";
+          $("#totalValue1").text(temp + comma(tempVa16));
+        } else {
+          $("#totalPrice1").text("0");
+          $("#totalPrice2").text("0");
+          $("#totalValue2").text("0");
+          $("#totalValue1").text("0");
+        }
+      }
+    </script>
+  </body>
+</html>

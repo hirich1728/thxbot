@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>코인 수익률 계산기</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="title" content="코인 수익률 계산기" />
+    <meta
+      name="description"
+      content="코인 수익률 계산기. 매도 금액에 따른 수익률을 계산해보세요. 
+      코인 수익률 계산기는 매수단가와 수량, 매도 단가를 입력하면 예상 수익률이 자동 계산됩니다.
+      매매 수수료가 제외된다는 점을 참고하세요."
+    />
+    <meta name="author" content="땡스봇" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:title" content="코인 수익률 계산기" />
+    <meta
+      property="og:description"
+      content="코인 수익률 계산기. 매도 금액에 따른 수익률을 계산해보세요. 
+      코인 수익률 계산기는 매수단가와 수량, 매도 단가를 입력하면 예상 수익률이 자동 계산됩니다.
+      매매 수수료가 제외된다는 점을 참고하세요."
+    />
+    <meta property="og:image" content="" />
+
+    <link href="bootstrap.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <link rel="canonical" href="" />
+    <script src="stockScript.js"></script>
+    
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-109755163-15");
+    </script>
+
+   
+
+    <!-- sns -->
+    
+    
+    <script src="https://code.jquery.com/jquery-1.8.0.js" integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs=" crossorigin="anonymous"></script>;
+  </head>
+
+  <body>
+  
+    <script>
+      $(window).on('load', function(){
+        $("#load").hide();
+      });
+    </script>
+
+<style>
+.navbar-nav > li > a {
+  padding: 10px 8px 10px 8px
+}
+</style>
+
+    <div class="container">
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            
+          </div>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">              
+              <li class="active"><a href="#">코인 분할매도 계산기</a></li>            
+              <li><a href="calcgainper.html">코인 수익률 계산</a></li>
+              <li><a href="#">코인 물타기계산기</a></li>
+              <li><a href="#">코인 평단가 계산</a></li>
+              
+            </ul>
+          </div>
+          <!--/.nav-collapse -->
+        </div>
+        <!--/.container-fluid -->
+      </nav>
+
+    
+
+      <!-- /////////////////////////////////////////////////////////////////// -->
+
+      
+      
+      <div style="padding-top: 5px">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">코인 수익률 계산기</h4>
+            <br />
+            <ul>
+              <li>소수점 네자리로 계산됩니다. 수량 입력 시 네자리로 사용하세요.</li>
+              <li>코인 계산기는 수수료가 적용되지 않습니다. 계산 결과는 참고용으로만 사용하세요.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-top: 2px">
+       
+        <div class="table-responsive" id="capture">
+            <table class="table table-borderless">
+              <thead>
+                <tr class="active">
+                  <td><input class="inputText form-control" placeholder="평균단가" id="valuePrice" onKeyup="inputNumberFormatPoint(this);totalCalc(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="수량" id="valueStock" onKeyup="inputNumberFormatPoint(this);totalCalc(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="매수금액" id="valueCalc" readonly /></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="active">
+                  <th class="text-right" style="width: 33%">매도가</th>
+                  <th class="text-right" style="width: 33%">수량</th>
+                  <th class="text-right" style="width: 33%">실현손익</th>
+                </tr>
+  
+                <tr id="line1">
+                  <td><input class="inputText form-control" placeholder="매도가" id="inputPrice1" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="수량" id="inputStock1" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="실현손익" id="calc1" readonly /></td>
+                </tr>
+                <tr id="line2">
+                  <td><input class="inputText form-control" placeholder="매도가" id="inputPrice2" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="수량" id="inputStock2" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="실현손익" id="calc2" readonly /></td>
+                </tr>
+                <tr id="line3">
+                  <td><input class="inputText form-control" placeholder="매도가" id="inputPrice3" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="수량" id="inputStock3" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="실현손익" id="calc3" readonly /></td>
+                </tr>
+                <tr id="line4">
+                  <td><input class="inputText form-control" placeholder="매도가" id="inputPrice4" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="수량" id="inputStock4" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="실현손익" id="calc4" readonly /></td>
+                </tr>
+                <tr id="line5">
+                  <td><input class="inputText form-control" placeholder="매도가" id="inputPrice5" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="수량" id="inputStock5" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="실현손익" id="calc5" readonly /></td>
+                </tr>
+                <tr id="line6">
+                  <td><input class="inputText form-control" placeholder="매도가" id="inputPrice6" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="수량" id="inputStock6" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="실현손익" id="calc6" readonly /></td>
+                </tr>
+                <tr id="line">
+                  <td><input class="inputText form-control" placeholder="매도가" id="inputPrice7" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="수량" id="inputStock7" onKeyup="inputNumberFormatPoint(this);" /></td>
+                  <td><input class="inputText form-control" placeholder="실현손익" id="calc7" readonly /></td>
+                </tr>
+  
+                <tr class="active text-success">
+                  <td style="text-align: right; vertical-align: middle">
+                    <div id="totalPrice">평균매도가</div>
+                  </td>
+                  <td style="text-align: right; vertical-align: middle">
+                    <div id="totalStock">매도수량</div>
+                  </td>
+                  <td style="text-align: right; vertical-align: middle">
+                    <div id="totalCalc">누적손익</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+        <div>
+          <div style="text-align: center">
+            <button type="button" class="btn btn-primary" onclick="calc()">계산</button>
+            <button type="button" class="btn btn-primary" onclick="reset()">초기화</button>
+            
+            <button type="button" class="btn btn-primary" onclick="clip()">주소복사</button>
+          </div>
+        </div>
+      </div>
+
+      
+ 
+      
+    </div>
+    <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+	================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="ie10-viewport-bug-workaround.js"></script>
+
+
+    <script>
+        let refreshCount = 0;
+  
+        function totalCalc(obj) {
+          var id = obj.id;
+          var tempPrice = 0;
+          var tempStock = 0;
+          var tempTotal = 0;
+          if (id == "valuePrice" || id == "valueStock") {
+            tempPrice = uncomma2($("#valuePrice").val());
+            tempStock = uncomma2($("#valueStock").val());
+  
+            tempTotal = tempPrice * tempStock;
+            tempTotal = tempTotal.toFixed(4);
+            $("#valueCalc").val(thousandSeparatorCommas(tempTotal));
+          }
+        }
+  
+        function calc() {
+          for (let i = 0; i < 7; i++) {
+            $("#line" + (i + 1)).removeClass("active");
+            $("#calc" + (i + 1)).val(0);
+          }
+          var tempPrice = uncomma2($("#valuePrice").val());
+          var tempStock = uncomma2($("#valueStock").val());
+          var tempTotal = tempPrice * tempStock;
+          tempTotal = tempTotal.toFixed(4);
+  
+          if (tempPrice === 0 || tempStock === 0 || tempTotal === 0) return;
+  
+          let arrayPrice = new Array();
+          let arrayStock = new Array();
+          let arrayCalc = new Array();
+          let averagePrice = 0;
+          let totalPrice = 0;
+          let totalStock = 0;
+          let totalCalc = 0;
+          for (let i = 0; i < 7; i++) {
+            arrayPrice[i] = Number(uncomma2($("#inputPrice" + (i + 1)).val()));
+            arrayStock[i] = Number(uncomma2($("#inputStock" + (i + 1)).val()));
+  
+            if (arrayPrice[i] !== 0 && arrayStock[i] !== 0) {
+              arrayCalc[i] = (arrayPrice[i] - tempPrice) * arrayStock[i];
+              $("#calc" + (i + 1)).val(thousandSeparatorCommas(arrayCalc[i].toFixed(4)));
+              $("#line" + (i + 1)).addClass("active");
+  
+              totalStock += arrayStock[i];
+              totalCalc += arrayCalc[i];
+  
+              totalPrice += arrayPrice[i] * arrayStock[i];
+              averagePrice = totalPrice / totalStock;
+  
+              $("#totalPrice").text(thousandSeparatorCommas(averagePrice.toFixed(4))); // 평균매도가
+              $("#totalStock").text(thousandSeparatorCommas(totalStock.toFixed(4))); // 매도수량
+              $("#totalCalc").text(thousandSeparatorCommas(totalCalc.toFixed(4))); // 누적손익
+            } else {
+              break;
+            }
+          }
+        }
+  
+        function reset() {
+          refreshCount++;
+          if (refreshCount > 5) window.location.href=window.location.href; // location.reload();
+  
+          $("#valuePrice").val("");
+          $("#valueStock").val("");
+          $("#valueCalc").val("");
+  
+          for (let i = 0; i < 7; i++) {
+            $("#inputPrice" + (i + 1)).val("");
+            $("#inputStock" + (i + 1)).val("");
+            $("#calc" + (i + 1)).val("");
+            $("#line" + (i + 1)).removeClass("active");
+          }
+  
+          $("#totalPrice").text("평균매도가");
+          $("#totalStock").text("매도수량");
+          $("#totalCalc").text("누적손익");
+        }
+      </script>
+  </body>
+</html>

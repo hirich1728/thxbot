@@ -1,0 +1,107 @@
+@charset "utf-8";
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 750px;
+  }
+}
+
+.ad1 {
+  width: 336px;
+  height: 280px;
+}
+@media (min-width: 320px) {
+  .ad1 {
+    width: 336px;
+    height: 280px;
+  }
+}
+@media (min-width: 600px) {
+  .ad1 {
+    width: 336px;
+    height: 280px;
+  }
+}
+@media (min-width: 768px) {
+  .ad1 {
+    width: 336px;
+    height: 280px;
+  }
+}
+@media (min-width: 1200px) {
+  .ad1 {
+    width: 336px;
+    height: 280px;
+  }
+}
+
+.ad2 {
+  width: 728px;
+  height: 90px;
+}
+@media (min-width: 320px) {
+  .ad2 {
+    width: 320px;
+    height: 100px;
+  }
+}
+@media (min-width: 600px) {
+  .ad2 {
+    width: 320px;
+    height: 100px;
+  }
+}
+@media (min-width: 768px) {
+  .ad2 {
+    width: 728px;
+    height: 90px;
+  }
+}
+@media (min-width: 1200px) {
+  .ad2 {
+    width: 728px;
+    height: 90px;
+  }
+}
+
+body h1 {
+  font-size: 18px;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+body h2 {
+  font-size: 16px;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+body h3 {
+  font-size: 16px;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+#load {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  opacity: 0.8;
+  background: white;
+  z-index: 99;
+  text-align: center;
+}
+
+#load > img {
+  position: absolute;
+  top: 50%;
+  left: 47%;
+  z-index: 100;
+}
