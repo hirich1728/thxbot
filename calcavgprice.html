@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>코인 평단가 계산기</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="title" content="코인 평단가 계산기" />
+    <meta
+      name="description"
+      content="코인 평단가 계산기. 코인 물타기 계산기. 단가와 수량이 입력된 차수의 항목과 전체 평균단가 및 수량, 
+      매수액이 자동 계산됩니다. 소수점 네자리로 계산됩니다. 수량 입력 시 네자리로 사용하세요"
+    />
+    <meta name="author" content="땡스봇" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bitbot.tistory.com" />
+    <meta property="og:title" content="코인 평단가 계산기. 코인 물타기 계산기" />
+    <meta
+      property="og:description"
+      content="코인 평단가 계산기. 코인 물타기 계산기. 단가와 수량이 입력된 차수의 항목과 전체 평균단가 및 수량, 
+      매수액이 자동 계산됩니다. 소수점 네자리로 계산됩니다. 수량 입력 시 네자리로 사용하세요"
+    />
+    <meta property="og:image" content="" />
+
+    <link href="bootstrap.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <link rel="canonical" href="http://stock.p999.co.kr/li6.html" />  
+    <script src="stockScript.js"></script>
+    <script src="html2canvas.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    
+    
+
+    <!-- sns -->
+    <script src="https://code.jquery.com/jquery-1.8.0.js" integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs=" crossorigin="anonymous"></script>;
+  </head>
+
+  <body>
+   
+    <script>
+      $(window).on('load', function(){
+        $("#load").hide();
+      });
+    </script>
+
+
+
+    <div class="container">
+      <!-- /////////////////////////////////////////////////////////////////// -->
+      <div style="padding-top: 5px">
+        <h4><li><a href="calcsplitsell.html">코인 분할매도 계산기</a></li>            </h4>
+        <h4><li><a href="calcgainper.html">코인 수익률 계산</a></li></h4>
+        <h4><li><a href="calcmul.html">코인 물타기계산기</a></li></h4>
+        <h4><li class="active"><a href="#">코인 평단가 계산</a></li></h4>
+      </div>
+
+      <div>
+        <h3>코인 평단가 계산기</h3>
+        <p>
+          코인 평단가 계산기입니다. 물타기나 불타기에 사용하세요.</br>
+          단가와 수량이 입력된 차수의 항목과 전체 평균단가 및 수량, 매수액이 자동 계산됩니다.</br>
+          매수 단가를 입력합니다. 해당 단가에 따른 매입 수량을 입력합니다.</br>
+          단가와 수량이 입력된 차수의 항목과 전체 평균단가 및 수량, 매수액이 자동 계산됩니다.</br>
+        </p>
+      </div>
+      
+      <div style="padding-top: 5px">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">코인 평단가 계산기</h4>
+            <br />
+            <ul>
+              <li>소수점 네자리로 계산됩니다. 수량 입력 시 네자리로 사용하세요.</li>
+              <li>수수료가 적용되지 않습니다. 참고용으로만 사용하세요!!!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-top: 2px">
+        <div class="table-responsive" id="capture">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th class="text-right" style="width: 1%">&nbsp;</th>
+                <th class="text-right" style="width: 37%">단가</th>
+                <th class="text-right" style="width: 37%">수량</th>
+                <th class="text-right" style="width: 25%">매수액</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="active">
+                <th class="label_title" style="vertical-align: middle">1</th>
+
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="단가" id="inputPrice1" onKeyup="inputNumberFormatPoint(this);calc(this);" />
+                </td>
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="수량" id="inputStock1" onKeyup="inputNumberFormatPoint(this);calc(this);" />
+                </td>
+                <td style="text-align: right; vertical-align: middle">
+                  <div id="calc1">0</div>
+                </td>
+              </tr>
+
+              <tr class="active">
+                <th class="label_title" style="vertical-align: middle">2</th>
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="단가" id="inputPrice2" onKeyup="inputNumberFormatPoint(this);calc(this);" />
+                </td>
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="수량" id="inputStock2" onKeyup="inputNumberFormatPoint(this);calc(this);" />
+                </td>
+                <td style="text-align: right; vertical-align: middle">
+                  <div id="calc2">0</div>
+                </td>
+              </tr>
+              <tr class="active">
+                <th class="label_title" style="vertical-align: middle">3</th>
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="단가" id="inputPrice3" onKeyup="inputNumberFormatPoint(this);calc(this);" />
+                </td>
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="수량" id="inputStock3" onKeyup="inputNumberFormatPoint(this);calc(this);" />
+                </td>
+                <td style="text-align: right; vertical-align: middle">
+                  <div id="calc3">0</div>
+                </td>
+              </tr>
+
+              <tr class="active">
+                <th class="label_title" style="vertical-align: middle">4</th>
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="단가" id="inputPrice4" onKeyup="inputNumberFormatPoint(this);calc(this);" />
+                </td>
+                <td>
+                  <input style="text-align: right" class="form-control" placeholder="수량" id="inputStock4" onKeyup="inputNumberFormatPoint(this);calc(this);" />
+                </td>
+                <td style="text-align: right; vertical-align: middle">
+                  <div id="calc4">0</div>
+                </td>
+              </tr>
+
+              <tr class="text-success">
+                <td style="text-align: right; vertical-align: middle">&nbsp;</td>
+                <td style="text-align: right; vertical-align: middle">
+                  <div id="totalPrice">평단가</div>
+                </td>
+                <td style="text-align: right; vertical-align: middle">
+                  <div id="totalStock">수량</div>
+                </td>
+                <td style="text-align: right; vertical-align: middle">
+                  <div id="totalValue">총매수액</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <div style="text-align: center">
+            <button type="button" class="btn btn-primary" onclick="reset()">초기화</button>            
+          </div>
+        </div>
+      </div>
+
+     
+    </div>
+    <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+	================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="ie10-viewport-bug-workaround.js"></script>
+
+    <script>
+      let refreshCount = 0;
+
+      function reset() {
+        refreshCount++;
+        if (refreshCount > 5) window.location.href=window.location.href; // location.reload();
+
+        $("#totalPrice").text("평단가");
+        $("#totalStock").text("수량");
+        $("#totalValue").text("총매수액");
+
+        $("#inputPrice1").val("");
+        $("#inputStock1").val("");
+        $("#calc1").text("0");
+
+        $("#inputPrice2").val("");
+        $("#inputStock2").val("");
+        $("#calc2").text("0");
+
+        $("#inputPrice3").val("");
+        $("#inputStock3").val("");
+        $("#calc3").text("0");
+
+        $("#inputPrice4").val("");
+        $("#inputStock4").val("");
+        $("#calc4").text("0");
+      }
+
+      function calc(obj) {
+        var id = obj.id;
+        var tempPrice = 0;
+        var tempStock = 0;
+
+        var tempTotal = 0;
+
+        if (id == "inputPrice1" || id == "inputStock1") {
+          tempPrice = uncomma2($("#inputPrice1").val());
+          tempStock = uncomma2($("#inputStock1").val());
+
+          tempTotal = tempPrice * tempStock;
+          tempTotal = tempTotal.toFixed(4);
+
+          $("#calc1").text(thousandSeparatorCommas(tempTotal));
+        } else if (id == "inputPrice2" || id == "inputStock2") {
+          tempPrice = uncomma2($("#inputPrice2").val());
+          tempStock = uncomma2($("#inputStock2").val());
+
+          tempTotal = tempPrice * tempStock;
+          tempTotal = tempTotal.toFixed(4);
+
+          $("#calc2").text(thousandSeparatorCommas(tempTotal));
+        } else if (id == "inputPrice3" || id == "inputStock3") {
+          tempPrice = uncomma2($("#inputPrice3").val());
+          tempStock = uncomma2($("#inputStock3").val());
+
+          tempTotal = tempPrice * tempStock;
+          tempTotal = tempTotal.toFixed(4);
+
+          $("#calc3").text(thousandSeparatorCommas(tempTotal));
+        } else if (id == "inputPrice4" || id == "inputStock4") {
+          tempPrice = uncomma2($("#inputPrice4").val());
+          tempStock = uncomma2($("#inputStock4").val());
+
+          tempTotal = tempPrice * tempStock;
+          tempTotal = tempTotal.toFixed(4);
+
+          $("#calc4").text(thousandSeparatorCommas(tempTotal));
+        }
+
+        submit();
+      }
+
+      function submit() {
+        var arrPrice = [Number(uncomma2($("#inputPrice1").val())), Number(uncomma2($("#inputPrice2").val())), Number(uncomma2($("#inputPrice3").val())), Number(uncomma2($("#inputPrice4").val()))];
+        var arrStock = [Number(uncomma2($("#inputStock1").val())), Number(uncomma2($("#inputStock2").val())), Number(uncomma2($("#inputStock3").val())), Number(uncomma2($("#inputStock4").val()))];
+
+        var arrCalc = new Array();
+
+        for (var i = 0; i < 4; i++)
+          if (arrPrice[i] == 0 || arrStock[i] == 0) {
+            arrPrice[i] = 0;
+            arrStock[i] = 0;
+          }
+
+        arrCalc[0] = arrPrice[0] * arrStock[0];
+        arrCalc[1] = arrPrice[1] * arrStock[1];
+        arrCalc[2] = arrPrice[2] * arrStock[2];
+        arrCalc[3] = arrPrice[3] * arrStock[3];
+
+        var totalStock = arrStock[0] + arrStock[1] + arrStock[2] + arrStock[3];
+        var totalValue = arrCalc[0] + arrCalc[1] + arrCalc[2] + arrCalc[3];
+        var totalPrice = 0;
+        if (totalStock == 0) totalPrice = 0;
+        else totalPrice = totalValue / totalStock;
+
+        $("#totalPrice").text(thousandSeparatorCommas(totalPrice.toFixed(4)));
+        $("#totalStock").text(thousandSeparatorCommas(totalStock.toFixed(4)));
+        $("#totalValue").text(thousandSeparatorCommas(totalValue.toFixed(4)));
+      }
+    </script>
+  </body>
+</html>
