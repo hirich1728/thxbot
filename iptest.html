@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <button onclick="getUser()">Å¬¸¯</button>
+    <div id="userInfo">text</div>
+    <script>
+      function getUser() {
+        
+        const config = {
+          method: "get"
+        };
+        
+        fetch("https://api64.ipify.org/?format=json", config)
+          .then(response => response.json())
+          .then(data =>{
+		
+		
+
+		console.log(data);
+
+		const divip = document.createElement("div");
+		divip.texContent=data & '123';
+
+		const userInfo = document.getElementById("userInfo");
+        userInfo.appendChild(divip);
+
+		  alert(data.ip)
+
+		  
+		  } )
+          .catch(error => console.log(error));
+      }
+    </script>
+  </body>
+</html>
